@@ -1,0 +1,15 @@
+- Name: علي المنصور (Ali Al-Mansour)
+   - Email: ali@test.com
+   - Phone: 501111111
+   - City: الرياض
+   - Password: password123
+   (Handle the multi-step registration UI carefully).
+3. Navigate to http://localhost:3000/driver/register.
+4. Register a new Driver:
+   - Name: سارة الأحمد (Sara Al-Ahmed)
+   - Email: sara@test.com
+   - Phone: 502222222
+   - City: جدة
+   - Password: password123
+5. Report the success of each registration. If possible, for SuperAdmin, inject a call to AuthService.register from the console on the login page:
+   AuthService.register('superadmin@test.com', 'password123', 'فهد', 'السعد', '503333333', 'الرياض', 'الإدارة', 'admin')
