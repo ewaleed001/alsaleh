@@ -88,13 +88,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   mergedTranslations.about_ceo.ceo_image = dynamicSettings.ceo_image || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000';
   
   if (lang === 'ar') {
-    mergedTranslations.about_ceo.ceo_name = dynamicSettings.ceo_name_ar || 'المدير التنفيذي';
-    mergedTranslations.about_ceo.ceo_role = dynamicSettings.ceo_role_ar || 'الرئيس التنفيذي';
-    mergedTranslations.about_ceo.ceo_bio = dynamicSettings.ceo_bio_ar || 'بخبرة تمتد لأكثر من 15 عاماً في قيادة المشاريع العقارية الكبرى...';
+    mergedTranslations.about_ceo.ceo_name = dynamicSettings.ceo_name_ar || 'د. علي آل صالح';
+    mergedTranslations.about_ceo.ceo_role = dynamicSettings.ceo_role_ar || 'رئيس مجلس الإدارة';
+    mergedTranslations.about_ceo.ceo_bio = dynamicSettings.ceo_bio_ar || 'قيادة برؤية طموحة لمستقبل عقاري واعد، بخبرة تمتد لأكثر من 15 عاماً في قيادة المشاريع العقارية الكبرى...';
+    mergedTranslations.about_ceo.ceo_badge = dynamicSettings.ceo_badge_ar || 'كلمة الإدارة';
+    mergedTranslations.about_ceo.ceo_section_title = dynamicSettings.ceo_section_title_ar || 'قيادة برؤية طموحة لمستقبل عقاري واعد';
+    mergedTranslations.about_ceo.ceo_stat_label = dynamicSettings.ceo_stat_label_ar || 'عاماً من الخبرة القيادية';
+    mergedTranslations.about_ceo.ceo_projects_val = dynamicSettings.ceo_projects_val || '50+';
+    mergedTranslations.about_ceo.ceo_projects_label = dynamicSettings.ceo_projects_label_ar || 'مشروعاً تم تنفيذها';
   } else {
-    mergedTranslations.about_ceo.ceo_name = dynamicSettings.ceo_name_en || 'CEO';
-    mergedTranslations.about_ceo.ceo_role = dynamicSettings.ceo_role_en || 'Chief Executive Officer';
-    mergedTranslations.about_ceo.ceo_bio = dynamicSettings.ceo_bio_en || 'With over 15 years of experience in leading major real estate projects...';
+    mergedTranslations.about_ceo.ceo_name = dynamicSettings.ceo_name_en || 'Dr. Ali Alsaleh';
+    mergedTranslations.about_ceo.ceo_role = dynamicSettings.ceo_role_en || 'Chairman of the Board';
+    mergedTranslations.about_ceo.ceo_bio = dynamicSettings.ceo_bio_en || 'Leading with an ambitious vision for a promising real estate future...';
+    mergedTranslations.about_ceo.ceo_badge = dynamicSettings.ceo_badge_en || 'Management Message';
+    mergedTranslations.about_ceo.ceo_section_title = dynamicSettings.ceo_section_title_en || 'Leading with an Ambitious Vision';
+    mergedTranslations.about_ceo.ceo_stat_label = dynamicSettings.ceo_stat_label_en || 'Years of leadership';
+    mergedTranslations.about_ceo.ceo_projects_val = dynamicSettings.ceo_projects_val || '50+';
+    mergedTranslations.about_ceo.ceo_projects_label = dynamicSettings.ceo_projects_label_en || 'Projects implemented';
   }
 
   // --- Static/Dynamic merging for About Page ---

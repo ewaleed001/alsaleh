@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { getSiteSettings, updateSiteSettings } from '../settings/actions';
+import ImageUploader from '@/components/ImageUploader';
+import StrategicGoalsManager from './StrategicGoalsManager';
 
 export default function AboutContentPage() {
   const [settings, setSettings] = useState<Record<string, string>>({
@@ -17,6 +19,7 @@ export default function AboutContentPage() {
     about_mission_en: '',
     about_values_ar: '',
     about_values_en: '',
+    about_image_url: '',
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -181,6 +184,34 @@ export default function AboutContentPage() {
                   className="w-full border border-gray-300 rounded-lg p-3 focus:border-brand-primary outline-none transition" />
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Section: Image */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-6">
+          <div className="flex items-center gap-2 pb-4 border-b border-gray-100">
+            <span className="text-2xl">🖼️</span>
+            <h2 className="text-lg font-bold text-brand-primary">صورة التعريف (من نحن؟)</h2>
+          </div>
+          <div className="space-y-4">
+            <p className="text-sm text-gray-500">هذه هي الصورة التي تظهر بجانب قسم التعريف في الصفحة الرئيسية.</p>
+            <ImageUploader 
+              bucket="about"
+              currentUrl={settings.about_image_url}
+              onUpload={(url) => setSettings(prev => ({ ...prev, about_image_url: url }))}
+            />
+          </div>
+        </div>
+
+        {/* Section: Strategic Goals */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-6">
+          <div className="flex items-center gap-2 pb-4 border-b border-gray-100">
+            <span className="text-2xl">🚀</span>
+            <h2 className="text-lg font-bold text-brand-primary">أهدافنا الاستراتيجية</h2>
+          </div>
+          <div className="space-y-4">
+            <p className="text-sm text-gray-500">هنا يمكنك التحكم بالأهداف الاستراتيجية التي تظهر في صفحة "عن الشركة".</p>
+            <StrategicGoalsManager />
           </div>
         </div>
 

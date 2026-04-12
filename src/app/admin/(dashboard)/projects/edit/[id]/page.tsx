@@ -16,6 +16,7 @@ interface Project {
   location: string;
   image_url: string;
   description?: string;
+  sort_order?: number;
 }
 
 // Next.js 14 — params is a plain object (not a Promise)
@@ -69,6 +70,7 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
       location: formData.get('location') as string,
       description: formData.get('description') as string,
       image_url: imageUrl,
+      sort_order: Number(formData.get('sort_order')) || 0,
     }, galleryUrls);
 
     if (result.error) { setError('خطأ في حفظ التعديلات: ' + result.error); setLoading(false); return; }
@@ -149,6 +151,11 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
                 <option value="تحت الإنشاء">تحت الإنشاء</option>
                 <option value="مستقبلي">مستقبلي</option>
               </select>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="sort_order" className="block text-sm font-bold text-gray-700">ترتيب العرض (الأصغر يظهر أولاً - قيمة 1 تظهر في البداية)</label>
+              <input type="number" id="sort_order" name="sort_order" required defaultValue={project.sort_order ?? 999}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition" />
             </div>
           </div>
 

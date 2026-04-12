@@ -10,10 +10,12 @@ export async function createProject(formData: {
   status: string;
   location: string;
   image_url: string;
+  sort_order?: number;
 }, galleryUrls?: string[]) {
+  const finalFormData = { ...formData, sort_order: formData.sort_order ?? 999 };
   const { data: project, error } = await supabaseAdmin
     .from('projects')
-    .insert([formData])
+    .insert([finalFormData])
     .select()
     .single();
 
@@ -50,6 +52,7 @@ export async function updateProject(id: string, formData: {
   status: string;
   location: string;
   image_url: string;
+  sort_order?: number;
 }, galleryUrls?: string[]) {
   const { data: project, error } = await supabaseAdmin
     .from('projects')

@@ -32,6 +32,7 @@ export default function AddProjectPage() {
       status: formData.get('status') as string,
       location: formData.get('location') as string,
       image_url: imageUrl,
+      sort_order: Number(formData.get('sort_order')) || 0,
     }, galleryUrls);
 
     if (result.error) {
@@ -101,6 +102,12 @@ export default function AddProjectPage() {
                 <option value="تحت الإنشاء">تحت الإنشاء</option>
                 <option value="مستقبلي">مستقبلي</option>
               </select>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="sort_order" className="block text-sm font-bold text-gray-700">ترتيب العرض (الأصغر يظهر أولاً - قيمة 1 تظهر في البداية)</label>
+              <input type="number" id="sort_order" name="sort_order" defaultValue={999}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition"
+                placeholder="مثال: 1" />
             </div>
           </div>
 

@@ -6,7 +6,7 @@ import DeleteButton from '@/components/DeleteButton';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminProjectsPage() {
-  const { data: projectsData, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+  const { data: projectsData, error } = await supabase.from('projects').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false });
   const projects = projectsData || [];
 
   return (
@@ -31,6 +31,7 @@ export default async function AdminProjectsPage() {
            <thead className="bg-brand-light text-brand-dark font-bold text-base border-b border-gray-200">
               <tr>
                  <th className="p-4 border-l border-white/50 w-12 text-center">م</th>
+                 <th className="p-4 border-l border-white/50 w-16 text-center">الترتيب</th>
                  <th className="p-4 border-l border-white/50 w-1/4">اسم المشروع</th>
                  <th className="p-4 border-l border-white/50">التصنيف</th>
                  <th className="p-4 border-l border-white/50">الحالة</th>
@@ -42,6 +43,9 @@ export default async function AdminProjectsPage() {
               {projects.map((proj, idx) => (
                 <tr key={proj.id} className="hover:bg-brand-light/30 transition border-b border-gray-50 last:border-0">
                    <td className="p-4 text-center text-gray-500 font-bold">{idx + 1}</td>
+                   <td className="p-4 text-center">
+                     <span className="bg-brand-light text-brand-dark px-2 py-1 rounded font-bold">{proj.sort_order || 0}</span>
+                   </td>
                    <td className="p-4 font-bold text-brand-primary text-base">{proj.title}</td>
                    <td className="p-4">
                      <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold">{proj.category}</span>

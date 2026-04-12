@@ -7,7 +7,11 @@ import ScrollReveal from '@/components/ScrollReveal';
 export const dynamic = 'force-dynamic';
 
 export default async function ProjectsPage() {
-  const { data: projects, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+  const { data: projects } = await supabase.from('projects').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false });
+  const { data: settingsData } = await supabase.from('site_settings').select('*');
+
+  const settings: Record<string, string> = {};
+  settingsData?.forEach(s => { settings[s.key] = s.value; });
 
   // Fallback to empty array if no data or error
   const displayProjects = projects || [];
@@ -16,7 +20,10 @@ export default async function ProjectsPage() {
     <div className="min-h-screen bg-brand-light">
       {/* Header Section */}
       <section className="relative h-[40vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center z-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop')" }} />
+        <div 
+          className="absolute inset-0 bg-cover bg-center z-0" 
+          style={{ backgroundImage: `url('${settings.projects_header_bg_url || "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"}')` }} 
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/95 via-brand-dark/85 to-brand-dark/95 z-10" />
         <div className="relative z-20 text-center px-4 max-w-3xl mx-auto">
           <ScrollReveal>

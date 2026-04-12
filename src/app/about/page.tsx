@@ -10,16 +10,32 @@ import TeamMemberCard from '@/components/TeamMemberCard';
 export default function AboutPage() {
   const { t, lang } = useLanguage();
   const [team, setTeam] = useState<any[]>([]);
+  const [settings, setSettings] = useState<Record<string, string>>({});
+  const [goals, setGoals] = useState<any[]>([]);
 
   useEffect(() => {
-    async function loadTeam() {
-      const { data } = await supabase
+    async function loadData() {
+      // Load team members
+      const { data: teamData } = await supabase
         .from('team_members')
         .select('*')
         .order('sort_order', { ascending: true });
-      if (data) setTeam(data);
+      if (teamData) setTeam(teamData);
+
+      // Load site settings
+      const { data: settingsData } = await supabase.from('site_settings').select('*');
+      const settingsMap: Record<string, string> = {};
+      settingsData?.forEach(s => { settingsMap[s.key] = s.value; });
+      setSettings(settingsMap);
+
+      // Load strategic goals
+      const { data: goalsData } = await supabase
+        .from('strategic_goals')
+        .select('*')
+        .order('sort_order', { ascending: true });
+      if (goalsData && goalsData.length > 0) setGoals(goalsData);
     }
-    loadTeam();
+    loadData();
   }, []);
   return (
     <div className="min-h-screen bg-brand-light">
@@ -27,7 +43,7 @@ export default function AboutPage() {
       <section className="relative h-[45vh] min-h-[350px] w-full flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')" }}
+          style={{ backgroundImage: `url('${settings.projects_header_bg_url || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/95 via-brand-dark/85 to-brand-dark/95 z-10" />
         <div className="relative z-20 text-center px-4 max-w-3xl mx-auto">
@@ -60,7 +76,7 @@ export default function AboutPage() {
           <ScrollReveal direction="left" delay={0.2}>
             <div className="relative aspect-[4/5] md:aspect-square rounded-tl-[100px] rounded-br-[100px] overflow-hidden shadow-2xl border-4 border-white group">
               <img 
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000" 
+                src={settings.about_image_url || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000"} 
                 alt="About Al-Saleh" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -134,9 +150,9 @@ export default function AboutPage() {
           <ScrollReveal direction="left" delay={0.2}>
             <div className="space-y-6">
               <div className="inline-block px-4 py-1 bg-brand-secondary/10 border border-brand-secondary/30 rounded-full text-brand-primary font-bold">
-                {lang === 'ar' ? 'كلمة الإدارة' : "Management Message"}
+                {t.about_ceo.ceo_badge}
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">{lang === 'ar' ? 'قيادة برؤية طموحة لمستقبل عقاري واعد' : 'Leading with an Ambitious Vision'}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark">{t.about_ceo.ceo_section_title}</h2>
               <p className="text-gray-600 text-lg leading-relaxed text-justify italic">
                 "{t.about_ceo.ceo_bio}"
               </p>
@@ -144,11 +160,11 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-6 pt-6">
                 <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
                   <div className="text-4xl font-bold text-brand-primary mb-1">{t.about_ceo.ceo_experience}</div>
-                  <div className="text-gray-500 text-sm">{lang === 'ar' ? 'عاماً من الخبرة القيادية' : 'Years of leadership'}</div>
+                  <div className="text-gray-500 text-sm">{t.about_ceo.ceo_stat_label}</div>
                 </div>
                 <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                  <div className="text-4xl font-bold text-brand-primary mb-1">50+</div>
-                  <div className="text-gray-500 text-sm">مشروعاً تم تنفيذها</div>
+                  <div className="text-4xl font-bold text-brand-primary mb-1">{t.about_ceo.ceo_projects_val}</div>
+                  <div className="text-gray-500 text-sm">{t.about_ceo.ceo_projects_label}</div>
                 </div>
               </div>
 
@@ -196,18 +212,18 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-dark text-center mb-16">أهدافنا الاستراتيجية</h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-8">
-            {[
-              { num: '01', title: 'التوسع الجغرافي', desc: 'التوسع في أكثر من 10 مدن رئيسية في المملكة العربية السعودية مع مشاريع متنوعة.' },
-              { num: '02', title: 'الاستدامة والجودة', desc: 'تبني معايير البناء الأخضر والمستدام في جميع مشاريعنا المستقبلية.' },
-              { num: '03', title: 'رضا العملاء', desc: 'تحقيق أعلى مستوى من رضا العملاء من خلال تقديم خدمات ما بعد البيع المتميزة.' },
-              { num: '04', title: 'الابتكار التقني', desc: 'توظيف أحدث التقنيات في إدارة المشاريع والتصميم المعماري الذكي.' },
-            ].map((goal, i) => (
+            {(goals.length > 0 ? goals : [
+              { title_ar: 'التوسع الجغرافي', title_en: 'Geographical Expansion', description_ar: 'التوسع في أكثر من 10 مدن رئيسية في المملكة العربية السعودية مع مشاريع متنوعة.', description_en: 'Expansion in more than 10 major cities in the Kingdom of Saudi Arabia with various projects.' },
+              { title_ar: 'الاستدامة والجودة', title_en: 'Sustainability and Quality', description_ar: 'تبني معايير البناء الأخضر والمستدام في جميع مشاريعنا المستقبلية.', description_en: 'Adopting green and sustainable building standards in all our future projects.' },
+              { title_ar: 'رضا العملاء', title_en: 'Customer Satisfaction', description_ar: 'تحقيق أعلى مستوى من رضا العملاء من خلال تقديم خدمات ما بعد البيع المتميزة.', description_en: 'Achieving the highest level of customer satisfaction through providing distinguished after-sales services.' },
+              { title_ar: 'الابتكار التقني', title_en: 'Technical Innovation', description_ar: 'توظيف أحدث التقنيات في إدارة المشاريع والتصميم المعماري الذكي.', description_en: 'Employing the latest technologies in project management and smart architectural design.' },
+            ]).map((goal, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
                 <div className="flex gap-6 p-6 rounded-xl bg-brand-light/50 border border-brand-secondary/20 hover:shadow-lg transition-shadow">
-                  <div className="text-4xl font-bold text-brand-secondary/30 shrink-0">{goal.num}</div>
+                  <div className="text-4xl font-bold text-brand-secondary/30 shrink-0">{(i + 1).toString().padStart(2, '0')}</div>
                   <div>
-                    <h3 className="text-xl font-bold text-brand-dark mb-2">{goal.title}</h3>
-                    <p className="text-gray-500 leading-relaxed">{goal.desc}</p>
+                    <h3 className="text-xl font-bold text-brand-dark mb-2">{lang === 'ar' ? goal.title_ar : (goal.title_en || goal.title_ar)}</h3>
+                    <p className="text-gray-500 leading-relaxed">{lang === 'ar' ? goal.description_ar : (goal.description_en || goal.description_ar)}</p>
                   </div>
                 </div>
               </ScrollReveal>

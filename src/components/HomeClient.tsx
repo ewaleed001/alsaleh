@@ -30,14 +30,21 @@ interface MediaItem {
   type: string;
 }
 
+interface Partner {
+  id: string;
+  name: string;
+  logo_url: string;
+}
+
 interface HomeClientProps {
   projects: Project[];
   news: NewsItem[];
   media: MediaItem[];
+  partners: Partner[];
   settings: Record<string, string>;
 }
 
-export default function HomeClient({ projects, news, media, settings }: HomeClientProps) {
+export default function HomeClient({ projects, news, media, partners, settings }: HomeClientProps) {
   const { t, lang } = useLanguage();
 
   const heroTitle = lang === 'ar' 
@@ -54,7 +61,7 @@ export default function HomeClient({ projects, news, media, settings }: HomeClie
       <section className="relative h-[75vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop')" }}
+          style={{ backgroundImage: `url('${settings.hero_bg_url || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop"}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/95 via-brand-dark/80 to-brand-dark/95 z-10" />
 
@@ -113,7 +120,11 @@ export default function HomeClient({ projects, news, media, settings }: HomeClie
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <ScrollReveal direction="right">
             <div className="aspect-[4/3] rounded-sm relative border-l-4 border-brand-primary shadow-2xl overflow-hidden group">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="About Al-Saleh" />
+              <img 
+                src={settings.about_image_url || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000"} 
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                alt="About Al-Saleh" 
+              />
               <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/40 to-transparent z-10" />
             </div>
           </ScrollReveal>
@@ -135,10 +146,10 @@ export default function HomeClient({ projects, news, media, settings }: HomeClie
       <section className="py-16 px-4 bg-brand-primary">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
           {[
-            { val: '+50', label: t.stats.experience },
-            { val: `+${projects.length || 15}`, label: t.stats.projects },
-            { val: '+500', label: t.stats.clients },
-            { val: '+10', label: t.stats.cities },
+            { val: settings.stat_experience || '+50', label: t.stats.experience },
+            { val: settings.stat_projects || `+${projects.length || 15}`, label: t.stats.projects },
+            { val: settings.stat_clients || '+500', label: t.stats.clients },
+            { val: settings.stat_cities || '+10', label: t.stats.cities },
           ].map((stat, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
               <div className="space-y-2">
@@ -193,7 +204,14 @@ export default function HomeClient({ projects, news, media, settings }: HomeClie
       </section>
 
       {/* 5. Company News */}
-      <section className="py-24 px-4 bg-brand-dark">
+      <section 
+        className="py-24 px-4 bg-brand-dark relative overflow-hidden"
+        style={settings.news_bg_url ? {
+          backgroundImage: `linear-gradient(rgba(17, 11, 109, 0.9), rgba(66, 3, 117, 0.9)), url('${settings.news_bg_url}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        } : {}}
+      >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
           <div className="w-full md:w-2/3 flex gap-6 overflow-hidden flex-wrap md:flex-nowrap">
             {news.map((item, index) => (
@@ -269,7 +287,46 @@ export default function HomeClient({ projects, news, media, settings }: HomeClie
         </div>
       </section>
 
-      {/* 7. CTA Section */}
+      {/* 7. Partners Section (Marquee) */}
+      {partners.length > 0 && (
+        <section className="py-20 bg-brand-light/50 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
+            <ScrollReveal>
+              <h2 className="text-3xl font-bold text-brand-dark mb-2">شركاء النجاح</h2>
+              <div className="w-20 h-1 bg-brand-secondary mx-auto"></div>
+            </ScrollReveal>
+          </div>
+          
+          <div className="relative flex overflow-x-hidden">
+            <div className="py-12 animate-marquee whitespace-nowrap flex items-center">
+              {[...partners, ...partners, ...partners].map((partner, i) => (
+                <div key={`${partner.id}-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[150px]">
+                  <img 
+                    src={partner.logo_url} 
+                    alt={partner.name} 
+                    className="max-h-16 w-auto object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Duplicate for seamless loop */}
+            <div className="absolute top-0 py-12 animate-marquee2 whitespace-nowrap flex items-center">
+              {[...partners, ...partners, ...partners].map((partner, i) => (
+                <div key={`${partner.id}-dup-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[150px]">
+                  <img 
+                    src={partner.logo_url} 
+                    alt={partner.name} 
+                    className="max-h-16 w-auto object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 8. CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-brand-primary via-brand-dark to-brand-primary">
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center text-white space-y-8">

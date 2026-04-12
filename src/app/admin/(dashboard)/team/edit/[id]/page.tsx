@@ -1,13 +1,13 @@
-import React, { use } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabase-admin';
 import TeamMemberForm from '../../TeamMemberForm';
 import { notFound } from 'next/navigation';
 
-export default async function EditTeamMemberPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default async function EditTeamMemberPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   
-  const { data: member, error } = await supabase
+  const { data: member, error } = await supabaseAdmin
     .from('team_members')
     .select('*')
     .eq('id', id)
@@ -21,8 +21,8 @@ export default async function EditTeamMemberPage({ params }: { params: Promise<{
     <div className="space-y-6 animate-fade-in-up max-w-4xl">
       <div className="flex justify-between items-center bg-white p-6 rounded-xl shadow-sm border border-gray-100">
         <div>
-          <h1 className="text-2xl font-bold text-brand-dark">تعديل بيانات الموظف</h1>
-          <p className="text-gray-500 mt-1">تعديل الاسم أو المنصب أو الصورة لعضو فريق العمل.</p>
+          <h1 className="text-2xl font-bold text-brand-dark">تعديل بيانات العضو</h1>
+          <p className="text-gray-500 mt-1">تعديل الاسم أو المنصب أو الصورة لعضو مجلس الإدارة.</p>
         </div>
         <Link href="/admin/team" className="text-gray-500 hover:text-brand-primary flex gap-2 items-center font-semibold transition">
           عودة ←

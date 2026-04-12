@@ -24,10 +24,26 @@ export default function SettingsPage() {
     ceo_bio_en: '',
     ceo_experience: '',
     ceo_image: '',
+    ceo_badge_ar: '',
+    ceo_badge_en: '',
+    ceo_section_title_ar: '',
+    ceo_section_title_en: '',
+    ceo_stat_label_ar: '',
+    ceo_stat_label_en: '',
+    ceo_projects_val: '',
+    ceo_projects_label_ar: '',
+    ceo_projects_label_en: '',
     hero_title_ar: '',
     hero_title_en: '',
     hero_subtitle_ar: '',
-    hero_subtitle_en: ''
+    hero_subtitle_en: '',
+    hero_bg_url: '',
+    projects_header_bg_url: '',
+    news_bg_url: '',
+    stat_experience: '',
+    stat_projects: '',
+    stat_clients: '',
+    stat_cities: '',
   });
 
   useEffect(() => {
@@ -115,6 +131,74 @@ export default function SettingsPage() {
                 type="text" name="hero_subtitle_en" value={settings.hero_subtitle_en} onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none text-left" 
                 dir="ltr"
+              />
+            </div>
+            <div className="md:col-span-2 space-y-2 pt-4 border-t border-gray-100">
+              <label className="block text-sm font-bold text-gray-700">صورة الخلفية (Home Hero Background)</label>
+              <ImageUploader 
+                bucket="media"
+                currentUrl={settings.hero_bg_url}
+                onUpload={(url) => setSettings(prev => ({ ...prev, hero_bg_url: url }))}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-6">
+          <h2 className="text-xl font-bold text-brand-dark flex items-center gap-2">
+            🖼️ صور خلفيات الصفحات (Page Backgrounds)
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">خلفية هيدر صفحة "المشاريع"</label>
+              <ImageUploader 
+                bucket="media"
+                currentUrl={settings.projects_header_bg_url}
+                onUpload={(url) => setSettings(prev => ({ ...prev, projects_header_bg_url: url }))}
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">خلفية قسم "أخبار الشركة" (الصفحة الرئيسية)</label>
+              <ImageUploader 
+                bucket="media"
+                currentUrl={settings.news_bg_url}
+                onUpload={(url) => setSettings(prev => ({ ...prev, news_bg_url: url }))}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-6">
+          <h2 className="text-xl font-bold text-brand-dark flex items-center gap-2">
+            📊 أرقام وإحصائيات الشركة (Live Stats)
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">سنوات الخبرة</label>
+              <input 
+                type="text" name="stat_experience" value={settings.stat_experience} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">عدد المشاريع</label>
+              <input 
+                type="text" name="stat_projects" value={settings.stat_projects} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">عدد العملاء</label>
+              <input 
+                type="text" name="stat_clients" value={settings.stat_clients} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">عدد المدن</label>
+              <input 
+                type="text" name="stat_cities" value={settings.stat_cities} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
               />
             </div>
           </div>
@@ -255,11 +339,81 @@ export default function SettingsPage() {
               />
             </div>
             <div className="md:col-span-2 space-y-2">
-              <label className="block text-sm font-bold text-gray-700">CEO Bio (English)</label>
+              <label className="block text-sm font-bold text-gray-700">النبذة التعريفية (English Bio)</label>
               <textarea 
                 name="ceo_bio_en" value={settings.ceo_bio_en} onChange={handleChange} rows={4}
                 className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none text-left"
                 dir="ltr"
+              />
+            </div>
+
+            <hr className="md:col-span-2 border-gray-100 my-4" />
+            
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">شارة القسم (عربي) - "Management Msg"</label>
+              <input 
+                type="text" name="ceo_badge_ar" value={settings.ceo_badge_ar} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">Section Badge (English)</label>
+              <input 
+                type="text" name="ceo_badge_en" value={settings.ceo_badge_en} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none text-left" dir="ltr"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">عنوان القسم (عربي)</label>
+              <input 
+                type="text" name="ceo_section_title_ar" value={settings.ceo_section_title_ar} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">Section Title (English)</label>
+              <input 
+                type="text" name="ceo_section_title_en" value={settings.ceo_section_title_en} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none text-left" dir="ltr"
+              />
+            </div>
+
+            <hr className="md:col-span-2 border-gray-100 my-4" />
+
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">وصف سنوات الخبرة (عربي)</label>
+              <input 
+                type="text" name="ceo_stat_label_ar" value={settings.ceo_stat_label_ar} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">Exp Label (English)</label>
+              <input 
+                type="text" name="ceo_stat_label_en" value={settings.ceo_stat_label_en} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none text-left" dir="ltr"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">قيمة الإحصائية الثانية (مثال: 50+)</label>
+              <input 
+                type="text" name="ceo_projects_val" value={settings.ceo_projects_val} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">وصف الإحصائية الثانية (عربي)</label>
+              <input 
+                type="text" name="ceo_projects_label_ar" value={settings.ceo_projects_label_ar} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">Stat 2 Label (English)</label>
+              <input 
+                type="text" name="ceo_projects_label_en" value={settings.ceo_projects_label_en} onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:ring-1 focus:ring-brand-primary outline-none text-left" dir="ltr"
               />
             </div>
           </div>
