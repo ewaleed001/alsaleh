@@ -12,7 +12,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const projectRef = 'cxdnzvvqqgcvdloiapuf';
+const projectRef = 'zrwpkyjsnpfekymtmmhm';
 const connectionUrlBase = `postgres://postgres:[PASSWORD]@db.${projectRef}.supabase.co:5432/postgres`;
 
 async function runSQL() {

@@ -1,8 +1,8 @@
 const { createClient } = require('@supabase/supabase-js');
 
 // استخراج البيانات من ملف .env.local يدوياً للسهولة
-const supabaseUrl = 'https://cxdnzvvqqgcvdloiapuf.supabase.co';
-const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4ZG56dnZxcWdjdmRsb2lhcHVmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzM4NDI4MiwiZXhwIjoyMDg4OTYwMjgyfQ.YKL9G5IuSiOGksncbTPfEhEKzPHHdCCA_bLOeAI2eM8';
+const supabaseUrl = 'https://zrwpkyjsnpfekymtmmhm.supabase.co';
+const serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyd3BreWpzbnBmZWt5bXRtbWhtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjAxODI2NiwiZXhwIjoyMDkxNTk0MjY2fQ.fzCV_wFcouNIISRbAQr5v9I9HVSWfB87syKVDdHbKRc';
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 
