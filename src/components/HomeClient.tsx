@@ -244,48 +244,7 @@ export default function HomeClient({ projects, news, media, partners, settings }
         </div>
       </section>
 
-      {/* 6. Media Library */}
-      <section className="py-24 px-4 bg-white">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <ScrollReveal>
-            <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-gray-200 pb-8">
-              <div>
-                <h2 className="text-4xl font-bold text-brand-dark mb-4">{t.sections.media}</h2>
-                <p className="text-gray-500 max-w-lg text-balance">{t.sections.media_sub}</p>
-              </div>
-              <Link href="/media" className="flex items-center gap-2 text-brand-secondary font-bold hover:text-brand-primary transition">
-                <span>{t.sections.view_media}</span>
-                <span>←</span>
-              </Link>
-            </div>
-          </ScrollReveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px]">
-            {media.map((item, index) => {
-              if (index === 0) {
-                return (
-                  <ScrollReveal key={item.id} className="col-span-2 row-span-2">
-                    <Link href="/media" className="group relative overflow-hidden rounded bg-brand-light cursor-pointer block w-full h-full">
-                      <img src={item.url} alt={item.alt_text} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent z-10" />
-                      <span className="absolute bottom-6 right-6 text-white font-bold z-20 text-lg">{item.alt_text}</span>
-                      <span className="absolute top-6 right-6 bg-brand-secondary text-brand-dark text-xs font-bold px-3 py-1 rounded z-20">{item.type === 'video' ? 'فيديو' : 'صورة'}</span>
-                    </Link>
-                  </ScrollReveal>
-                );
-              }
-              return (
-                <ScrollReveal key={item.id} delay={index * 0.1}>
-                  <Link href="/media" className="group relative overflow-hidden rounded bg-brand-light cursor-pointer block w-full h-full">
-                    <img src={item.url} alt={item.alt_text} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10" />
-                  </Link>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* 7. Partners Section (Marquee) */}
       {partners.length > 0 && (

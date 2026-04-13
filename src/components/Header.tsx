@@ -17,7 +17,6 @@ export default function Header() {
     { href: '/about', label: t.nav.about },
     { href: '/projects', label: t.nav.projects },
     { href: '/news', label: t.nav.news },
-    { href: '/media', label: t.nav.media },
   ];
 
   // Close menu on route change
