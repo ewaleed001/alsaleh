@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
+import LightboxGallery from '@/components/LightboxGallery';
 
 export const dynamic = 'force-dynamic';
 
@@ -95,13 +96,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
             {gallery && gallery.length > 0 && (
               <div className="pt-12 border-t border-gray-100">
                 <h3 className="text-2xl font-bold text-brand-dark mb-6">معرض صور المشروع</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {gallery.map((img: any, i: number) => (
-                    <div key={i} className="aspect-video rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
-                      <img src={img.image_url} alt={`${project.title} - ${i}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    </div>
-                  ))}
-                </div>
+                <LightboxGallery gallery={gallery} projectTitle={project.title} />
               </div>
             )}
            </div>
