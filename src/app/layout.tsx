@@ -9,14 +9,14 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Al-Saleh Group Real Estate | شركة آل صالح العقارية",
-  description: "اكتشف أكثر من 50 عاماً من الخبرة في السوق العقاري السعودي. مشاريع سكنية وتجارية وفندقية في الرياض ومناطق المملكة.",
+  title: "Al-Saleh Group | شركة آل صالح",
+  description: "اكتشف أكثر من 50 عاماً من الخبرة في السوق السعودي. مشاريع في الرياض ومناطق المملكة.",
   icons: {
     icon: '/logo.svg',
   },
   openGraph: {
-    title: "شركة آل صالح العقارية | Al-Saleh Group Real Estate",
-    description: "أكثر من 50 عاماً من الثقة والتميز في السوق العقاري السعودي",
+    title: "شركة آل صالح | Al-Saleh Group",
+    description: "أكثر من 50 عاماً من الثقة والتميز في السوق السعودي",
     type: "website",
     locale: "ar_SA",
   },
