@@ -258,11 +258,11 @@ export default function HomeClient({ projects, news, media, partners, settings }
           <div className="relative flex overflow-x-hidden">
             <div className="py-12 animate-marquee whitespace-nowrap flex items-center">
               {[...partners, ...partners, ...partners].map((partner, i) => (
-                <div key={`${partner.id}-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[200px] md:min-w-[250px]">
+                <div key={`${partner.id}-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[250px] md:min-w-[300px]">
                   <img
                     src={partner.logo_url}
                     alt={partner.name}
-                    className="max-h-24 md:max-h-32 w-auto object-contain"
+                    className="max-h-32 md:max-h-40 w-auto object-contain"
                   />
                 </div>
               ))}
@@ -271,11 +271,11 @@ export default function HomeClient({ projects, news, media, partners, settings }
             {/* Duplicate for seamless loop */}
             <div className="absolute top-0 py-12 animate-marquee2 whitespace-nowrap flex items-center">
               {[...partners, ...partners, ...partners].map((partner, i) => (
-                <div key={`${partner.id}-dup-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[200px] md:min-w-[250px]">
+                <div key={`${partner.id}-dup-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[250px] md:min-w-[300px]">
                   <img
                     src={partner.logo_url}
                     alt={partner.name}
-                    className="max-h-24 md:max-h-32 w-auto object-contain"
+                    className="max-h-32 md:max-h-40 w-auto object-contain"
                   />
                 </div>
               ))}
