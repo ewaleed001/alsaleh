@@ -29,7 +29,7 @@ export const translations = {
     stats: {
       experience: 'سنة من الخبرة',
       projects: 'مشروع عقاري',
-      clients: 'عميل راضٍ',
+      clients: 'عميل حالياً',
       cities: 'مدن في المملكة',
     },
     // Sections
@@ -159,7 +159,7 @@ export const translations = {
     stats: {
       experience: 'Years of Experience',
       projects: 'Real Estate Projects',
-      clients: 'Satisfied Clients',
+      clients: 'Current Clients',
       cities: 'Cities in the Kingdom',
     },
     sections: {

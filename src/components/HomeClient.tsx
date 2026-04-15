@@ -47,7 +47,7 @@ interface HomeClientProps {
 export default function HomeClient({ projects, news, media, partners, settings }: HomeClientProps) {
   const { t, lang } = useLanguage();
 
-  const heroTitle = lang === 'ar' 
+  const heroTitle = lang === 'ar'
     ? (settings.hero_title_ar || t.hero.title)
     : (settings.hero_title_en || t.hero.title);
 
@@ -120,10 +120,10 @@ export default function HomeClient({ projects, news, media, partners, settings }
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <ScrollReveal direction="right">
             <div className="aspect-[4/3] rounded-sm relative border-l-4 border-brand-primary shadow-2xl overflow-hidden group">
-              <img 
-                src={settings.about_image_url || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000"} 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                alt="About Al-Saleh" 
+              <img
+                src={settings.about_image_url || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000"}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt="About Al-Saleh"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/40 to-transparent z-10" />
             </div>
@@ -144,12 +144,11 @@ export default function HomeClient({ projects, news, media, partners, settings }
 
       {/* 3. Stats Counter */}
       <section className="py-16 px-4 bg-brand-primary">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
           {[
             { val: settings.stat_experience || '+50', label: t.stats.experience },
             { val: settings.stat_projects || `+${projects.length || 15}`, label: t.stats.projects },
             { val: settings.stat_clients || '+500', label: t.stats.clients },
-            { val: settings.stat_cities || '+10', label: t.stats.cities },
           ].map((stat, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
               <div className="space-y-2">
@@ -204,7 +203,7 @@ export default function HomeClient({ projects, news, media, partners, settings }
       </section>
 
       {/* 5. Company News */}
-      <section 
+      <section
         className="py-24 px-4 bg-brand-dark relative overflow-hidden"
         style={settings.news_bg_url ? {
           backgroundImage: `linear-gradient(rgba(17, 11, 109, 0.9), rgba(66, 3, 117, 0.9)), url('${settings.news_bg_url}')`,
@@ -255,15 +254,15 @@ export default function HomeClient({ projects, news, media, partners, settings }
               <div className="w-20 h-1 bg-brand-secondary mx-auto"></div>
             </ScrollReveal>
           </div>
-          
+
           <div className="relative flex overflow-x-hidden">
             <div className="py-12 animate-marquee whitespace-nowrap flex items-center">
               {[...partners, ...partners, ...partners].map((partner, i) => (
-                <div key={`${partner.id}-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[150px]">
-                  <img 
-                    src={partner.logo_url} 
-                    alt={partner.name} 
-                    className="max-h-16 w-auto object-contain"
+                <div key={`${partner.id}-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[200px] md:min-w-[250px]">
+                  <img
+                    src={partner.logo_url}
+                    alt={partner.name}
+                    className="max-h-24 md:max-h-32 w-auto object-contain"
                   />
                 </div>
               ))}
@@ -272,11 +271,11 @@ export default function HomeClient({ projects, news, media, partners, settings }
             {/* Duplicate for seamless loop */}
             <div className="absolute top-0 py-12 animate-marquee2 whitespace-nowrap flex items-center">
               {[...partners, ...partners, ...partners].map((partner, i) => (
-                <div key={`${partner.id}-dup-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[150px]">
-                  <img 
-                    src={partner.logo_url} 
-                    alt={partner.name} 
-                    className="max-h-16 w-auto object-contain"
+                <div key={`${partner.id}-dup-${i}`} className="mx-8 grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 flex items-center justify-center min-w-[200px] md:min-w-[250px]">
+                  <img
+                    src={partner.logo_url}
+                    alt={partner.name}
+                    className="max-h-24 md:max-h-32 w-auto object-contain"
                   />
                 </div>
               ))}

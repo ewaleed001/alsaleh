@@ -9,13 +9,13 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Al-Saleh Group | شركة آل صالح",
+  title: "Al Saleh Company | شركة آل صالح",
   description: "اكتشف أكثر من 50 عاماً من الخبرة في السوق السعودي. مشاريع في الرياض ومناطق المملكة.",
   icons: {
     icon: '/logo.svg',
   },
   openGraph: {
-    title: "شركة آل صالح | Al-Saleh Group",
+    title: "شركة آل صالح | Al Saleh Company",
     description: "أكثر من 50 عاماً من الثقة والتميز في السوق السعودي",
     type: "website",
     locale: "ar_SA",
